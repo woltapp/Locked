@@ -17,7 +17,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Locked"
+            name: "Locked",
+            swiftSettings: [
+			    .enableExperimentalFeature("StrictConcurrency")
+  			]
         )
     ]
 )
