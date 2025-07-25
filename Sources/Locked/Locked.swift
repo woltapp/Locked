@@ -47,16 +47,16 @@ public struct Locked<Value: Sendable>: @unchecked Sendable {
 
 }
 
-public final class OldLock<Value: Sendable>: @unchecked Sendable {
+final class OldLock<Value: Sendable>: @unchecked Sendable {
     private let lock = NSLock()
     private var mutableValue: Value
 
-    public init(_ value: Value) {
+    init(_ value: Value) {
         self.mutableValue = value
     }
 
     @discardableResult
-    public func withValue<ReturnType>(_ body: (inout Value) throws -> ReturnType) rethrows -> ReturnType {
+    func withValue<ReturnType>(_ body: (inout Value) throws -> ReturnType) rethrows -> ReturnType {
         return try lock.withLock { try body(&mutableValue) }
     }
 }
